@@ -13,37 +13,37 @@ enum AccountStatus {
 }
 
 model User {
-  id            String         @id @default(uuid())
+  id            String        @id @default(uuid())
   name          String?
-  email         String         @unique
+  email         String        @unique
   emailVerified DateTime?
   image         String?
-  status        AccountStatus  @default(ACTIVE)
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  status        AccountStatus @default(ACTIVE)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 
-  roles         UserRole[]
-  auditLogs     AuditLog[]     @relation("ActorLogs")
+  roles     UserRole[]
+  auditLogs AuditLog[] @relation("ActorLogs")
 }
 
 model Role {
-  id          String           @id @default(uuid())
-  name        String           @unique
+  id          String   @id @default(uuid())
+  name        String   @unique
   description String?
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   users       UserRole[]
   permissions RolePermission[]
 }
 
 model Permission {
-  id          String           @id @default(uuid())
-  identifier  String           @unique
+  id          String   @id @default(uuid())
+  identifier  String   @unique
   description String?
-  createdAt   DateTime         @default(now())
+  createdAt   DateTime @default(now())
 
-  roles       RolePermission[]
+  roles RolePermission[]
 }
 
 model UserRole {
